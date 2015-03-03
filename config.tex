@@ -1,0 +1,688 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Konfiguration für AW III
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Zusammenführung von ledmac.tex und memoir.tex
+%%% Mi 25 Apr 2007 23:01:23 CEST  AvS
+%%% Umstellung von jurabib auf biblatex
+%%% Mi Mai 23 23:09:47 2007 AvS
+%%% Umstellung auf biblatex 0.8 und authortitle-avs
+%%% Fr Oct 10 2008 14:44:29 Avs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\usepackage{scrwfile}
+%%%%%%%%% Geladene Pakete %%%%%%%%%%%
+\usepackage[latin,greek,german]{babel}
+\languageattribute{greek}{polutoniko}
+\languageattribute{latin}{classic}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{etex}
+\usepackage{textcomp}
+\usepackage{teubner}
+\usepackage[parapparatus]{eledmac}
+\usepackage{eledpar}
+\usepackage{longtable,booktabs}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage[autostyle=true,german=guillemets]{csquotes}
+\DeclareQuoteAlias[guillemets]{german}{latin}
+\DeclareQuoteStyle{polutonikogreek}
+    {((}{))}
+    {\dt{\flq}}{\dt{\frq}}
+%%%%%%% Schriften %%%%%%%%%%%%%%%
+\usepackage{AGaramondPro}
+%\usepackage[neohellenic]{psgreek}
+\usepackage{substitutefont}
+\substitutefont{LGR}{\rmdefault}{neohellenic}
+\renewcommand{\ttdefault}{pcr}
+\renewcommand{\sfdefault}{MyriadProJ}
+%%%%%% biblatex-Konfiguration %%%%%%%%%%
+\usepackage[backend=biber,language=german,style=authortitle-dw,hyperref,maxnames=4,idembibformat=dash,idemtracker=false,ibidtracker=false]{biblatex}
+\bibliography{dokumente}
+\defbibheading{edition}{\section*{Editionen}}
+\defbibheading{literatur}{\section*{Sekundärliteratur}}
+\renewcommand*{\labelnamepunct}{\addcomma\space}
+\renewcommand*{\citenamepunct}{\addcomma\space}
+\DeclareFieldFormat{postnote}{#1}
+\DeclareFieldFormat{postnote}{#1}
+\DeclareFieldFormat{pages}{#1}
+\DeclareFieldFormat{pagetotal}{#1}
+\DeclareCiteCommand{\editioncite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printnames[labelname]{editor}\addcomma\addspace\usebibmacro{citetitle}}
+  {\multicitedelim}
+  {\usebibmacro{cite:postnote}}
+\DeclareCiteCommand*{\editioncite}%[\mkbibparens]
+  {}
+  {\printfield{postnote}\addspace}
+  {\multicitedelim}
+  {\printnames[labelname]{author}}
+%%%%%%%%% Hyperref
+\usepackage[implicit=true,plainpages=false,pdfpagelabels]{hyperref}
+\hypersetup{%
+pdftitle = {Dokumente zum arianischen Streit, Lieferung 4},
+pdfsubject = {Edition},
+pdfkeywords = {Dokumente zum arianischen Streit, Edition, Lieferung 4},
+pdfauthor = {\textcopyright\ 2012 Edition Athanasius Werke},
+}
+\usepackage{memhfixc}
+\memhyperindexfalse
+\usepackage{microtype}
+\title{Dokumente zum arianischen Streit}
+\author{Hanns Christof Brennecke\\Uta Heil\\Christian Müller\\Annette von Stockhausen\\Angelika Wintjes}
+\date{\today}
+%%%%%%%%%%%% Indices erstellen %%%%%%%%%%%%%%%%%%%%
+ % \makeindex[bibel]
+ % \makeindex[quellen]
+ % \makeindex[stellen]
+ % \makeindex[synoden]
+ % \makeindex[namen]
+%% im Text
+\newcommand*{\bindex}[1]{\protect\edindex[bibel]{#1}}
+\newcommand*{\sindex}[1]{\protect\edindex[synoden]{#1}}
+\newcommand*{\nindex}[1]{\protect\edindex[namen]{#1}}
+%% in der Einleitung
+\newcommand*{\ebindex}[1]{\protect\index[bibel]{#1}}
+\newcommand*{\esindex}[1]{\protect\index[synoden]{#1}}
+\newcommand*{\enindex}[1]{\protect\index[namen]{#1}}
+\newcommand*{\exindex}[1]{\protect\index[stellen]{#1}}
+\let\ledinnotehyperpage\hyperpage
+%%%%%%%%% Seitenlayout %%%%%%%%%%%%%
+\settrimmedsize{297mm}{210mm}{*}
+\setlength{\trimtop}{0pt}
+\setlength{\trimedge}{\stockwidth}
+\addtolength{\trimedge}{-\paperwidth}
+\settypeblocksize{22.5cm}{14.5cm}{*}
+\setulmargins{3.5cm}{*}{*}
+\setlrmargins{*}{*}{1}
+\setmarginnotes{10pt}{11pt}{\onelineskip}
+\setheadfoot{\onelineskip}{2\onelineskip}
+\setheaderspaces{*}{\onelineskip}{*}
+\checkandfixthelayout
+
+%%%%%%%%% Seitenstil (Kopfzeilenlayout) %%%%%%
+\makepagestyle{dokumente}
+\makepsmarks{dokumente}{%
+  \let\@mkboth\markboth
+  \def\chaptermark##1{\markboth{\thechapter. \ ##1}{\thechapter. \ ##1}}    % left mark & right marks
+  \def\sectionmark##1{\markright{%
+    \ifnum \c@secnumdepth>\z@
+      \thesection. \ %
+    \fi
+    ##1}}
+  \def\tocmark{\markboth{\contentsname}{\contentsname}}
+  \def\lofmark{\markboth{\listfigurename}{\listfigurename}}
+  \def\lotmark{\markboth{\listtablename}{\listtablename}}
+  \def\bibmark{\markboth{\bibname}{\bibname}}
+  \def\indexmark{\markboth{\indexname}{\indexname}}
+}
+\makeevenhead{dokumente}{\thepage}{\small\leftmark}{}
+\makeoddhead{dokumente}{}{\small\rightmark}{\thepage}
+% \makeevenfoot{dokumente}{}{\tiny\texttt{\dt{Probeausdruck Athanasius
+%       Werke III/4 -- Stand: \today\ -- Blatt \thesheetsequence\ von
+%       \thelastsheet\\(\BZR)}}}{}
+% \makeoddfoot{dokumente}{}{\tiny\texttt{\dt{Probeausdruck Athanasius
+%       Werke III/4 -- Stand: \today\ -- Blatt \thesheetsequence\ von
+%       \thelastsheet\\(\BZR)}}}{}
+
+\pagestyle{dokumente}
+\aliaspagestyle{chapter}{empty}
+
+%%%%%%%% Überschriften %%%%%%%%%%%%%%
+%%%%%%%% Kapitel %%%%%%%%%%%%%%%%%
+\makechapterstyle{ath}{
+  \renewcommand{\printchaptername}{}
+  \renewcommand{\chapternamenum}{}
+  \renewcommand{\chaptitlefont}{\centering\Large}
+  \renewcommand{\chapnumfont}{\chaptitlefont}
+  \renewcommand{\printchapternum}{\centering \chapnumfont \thechapter\space}
+  \renewcommand{\afterchaptertitle}{\par\nobreak\vskip \afterchapskip}
+}
+\chapterstyle{ath}
+%%%%%%%% Neuer Kapitelbefehl für »Urkunden« %%%
+%\let\kapitel\chapter
+%\renewcommand{\clearforchapter}{\par}  % Chapter beginnt nicht neue Seite
+\newcommand\kapitel{%
+  \ifartopt\par\else
+%     \clearforchapter
+\par
+    \thispagestyle{chapter}
+    \global\@topnum\z@
+  \fi
+  \@afterindentfalse
+  \@ifstar{\@m@mschapter}{\@m@mchapter}}
+%%%%%%%% Sections u.s.w. %%%%%%%%%%%%%%
+\setsecheadstyle{\large\centering}
+\setsubsecheadstyle{\normalsize\centering}
+\setsubsubsecheadstyle{\normalsize\centering}
+\setparaheadstyle{\itshape}
+%%%%%%%%%%% Abstände vor Kapitel etc. %%%
+\setlength{\beforechapskip}{2\baselineskip}
+\setlength{\midchapskip}{.5\baselineskip}
+\setlength{\afterchapskip}{\baselineskip}
+\setbeforesecskip{2\baselineskip}
+\setbeforeparaskip{0\baselineskip}
+\setaftersecskip{\baselineskip}
+%%%%%%%% Nummerierung nur bis section %%%%%%
+\maxsecnumdepth{section}
+
+%%%%%%% Formatierungen für Edition %%%%%%%%
+%%%%%%% Handschriftenbeschreibung Siglenliste %%
+\newenvironment{codices}%
+	{\begin{longtable}[l]{p{1.6cm}p{9cm}p{3cm}}}
+	{\end{longtable}\ignorespacesafterend}
+\newenvironment{konjektoren}% Angepaßte Tabelleneinstellungen für Namen der Konjektoren
+	{\begin{longtable}[l]{p{3cm}p{9.5cm}p{0.5cm}}}
+	{\end{longtable}\ignorespacesafterend}
+\newcommand{\codex}[3]{%
+	#1% Sigle
+	& #2% Name
+	& #3% Datierung
+	\\
+}
+%%%%%%% Paragraphenangabe in nicht-nummeriertem Text (Übersetzungen aus AW III/1+2)
+\newcommand{\kapnum}[1]{\noindent\llap{\makebox[.5cm][l]{\footnotesize #1}}\ifthenelse{\equal{#1}{1}}{\noindent}{\quad}}
+%%%%%%% Paragraphenangabe im nummerierten Text %%
+\newcommand{\kap}[1]{\ledsidenote{\dt{#1}}\bezdummy}
+\newcommand{\kapR}[1]{} %% Befehl für die Kapitelzählung rechts - momentan nicht ausgegeben
+%%%%%%%%%%%%%%%% Folio-Angabe von Handschriften am Rand im
+%%%%%%%%%%%%%%%% nummerierten Text: Zwei Argumente:
+%%%%%%%%%%%%%%%% 1. Handschriftensigle 2. Folio
+% \newcommand{\folio}[2]{\dt{ |}\ledsidenote{\dt{\texttt{#1 #2}}}}
+%% Ausblenden:
+\newcommand{\folio}[2]{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% Definition einer Praefatio-Umgebung %%%%
+\newenvironment{praefatio}%
+{\footnotesize}%
+{\ignorespacesafterend}%
+%%%%%%%%%%%%% Listen enger gesetzt %%%%%%%%%%%
+
+%%%%%%% Description-Umgebung so umdefiniert, dass folgende Zeilen nicht mehr eingezogen werden
+\renewenvironment{description}%
+               {\list{}{\labelwidth\z@ \setlength{\leftmargin}{0em}\setlength{\parsep}{0pt}
+               \let\makelabel\descriptionlabel}\tightlist}%
+               {\endlist\ignorespacesafterend}
+% \renewcommand*{\descriptionlabel}[1]{\hspace\labelsep\normalfont\itshape #1}
+
+\newenvironment{einleitung}% allgemeine Einleitung Dok.
+               {\list{}{\labelwidth\z@ \setlength{\leftmargin}{0em}\setlength{\parsep}{0pt}}\tightlist}%
+               {\endlist\ignorespacesafterend}
+%%%%%% Übersetzungs-Umgebung %%%%%%%%%%%
+\newenvironment{translatio}
+{\small\begin{otherlanguage}{german}}%
+{\end{otherlanguage}}
+
+%%%%%% Befehl, um den Autor eines Textstückes angeben zu können %%%
+\newcommand{\autor}[1]{%
+ \vskip\baselineskip\begin{center}\large{#1}\end{center}%
+}
+
+%%%%%%%%%%% Ledmac-Einstellungen
+\numberonlyfirstinline
+\symlinenum{||}
+\preXnotes{1.5em plus .5em minus .5em}
+\beforeXnotes{1.5em plus .25em minus .25em}
+\Xnotenumfont{\usefont{T1}{AGaramondProJ}{m}{n}}
+\renewcommand*{\numlabfont}{\usefont{T1}{AGaramondProJ}{m}{n}\scriptsize}
+%%% Bibelstellen
+\footparagraph{A}
+\inplaceoflemmaseparator[A]{0.25em}
+%%% Handschriften
+\footparagraph{C}
+\nolemmaseparator[C]
+\inplaceofnumber[C]{0em}
+\inplaceoflemmaseparator[C]{0.25em}
+%%% Textkritischer App.
+\footparagraph{D}
+\inplaceoflemmaseparator[D]{0.25em}
+%%% Historischer Kommentar
+\renewcommand*{\thefootnoteA}{\alph{footnoteA}}
+\footparagraphX{A}
+\notenumfontX[A]{\normalfont}
+\usepackage{perpage}
+\MakePerPage{footnoteA}
+
+%%%%%%%%%% Zeilennummer + 1 = f. (und Zeilennummer löschen) %%%%%%%%%%%%%%%%%%%
+\def\printlines#1|#2|#3|#4|#5|#6|#7|{%
+  \begingroup
+  \setprintlines{#1}{#2}{#3}{#4}{#5}{#6}%
+  \ifnum #1=#4 
+  \ifnum #2<#5 
+          \newcount\endlinenumber
+          \endlinenumber = #5 
+          \advance\endlinenumber by -1 
+          \ifnum #2<\endlinenumber #2\endashchar#5\else #2\nobreakspace f\fullstop
+  \fi
+  \fi 
+  \ifnum#2=-1 \ledplinenumfalse \fi
+  \ifnum #2=#5 \ifledplinenum #2\else \symplinenum\fi
+  \fi 
+  \fi 
+  \ifnum #1<#4 \ifl@d@pnum #1\fullstop\fi #2
+  \endashchar
+  \ifl@d@pnum #4\fullstop\fi #5
+  % \ifl@d@elin \fi
+  \fi
+  %\ifledplinenum \linenumrep{#2}\else \symplinenum\fi
+  % \ifl@d@ssub \fullstop \sublinenumrep{#3}\fi
+  % \ifl@d@esl \ifl@d@elin \fullstop\fi \sublinenumrep{#6}\fi
+  \endgroup}
+
+
+%%%%%%% Abkürzungen für den textkritischen Apparat %%
+%%%%%%%% Sigle %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Verwendung: \sg{Sigle(ngruppe)} (nur bei lateinischen Buchstaben)
+\newcommand{\sg}[1]{\dt{#1}}
+% Verwendung: \sglat{Sigle(ngruppe)} (nur bei lateinischen Buchstaben
+% und in lateinischem Text)
+\newcommand{\sglat}[1]{\dt{\textit{#1}}}
+% Verwendung: \sgg{Sigle(ngruppe)} (nur bei griechischen Buchstaben)
+\newcommand{\sgg}[1]{\griech{#1}}
+
+
+%%%%%%%%% Eintrag in Bibelstellenapparat %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Verwendung: \bibel{Lemma}{Bibelstelle} Direktes Zitat
+\newcommand{\bibel}[2]{\edtext{#1}{\lemma{}\Afootnote[nosep]{\dt{#2}}}}
+% Verwendung: \bibelcf{Lemma}{Bibelstelle} Anspielung
+\newcommand{\bibelcf}[2]{\edtext{#1}{\Afootnote[nosep]{\dt{vgl. #2}}}}
+% bei langen Stellen, auf die verwiesen wird
+\newcommand{\bibelcfl}[3]{\edtext{#1}{\lemma{#2}\Afootnote[nosep]{\dt{vgl. #3}}}}
+%%%%%%% Textkritische Variante %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Lateinische Variante in griechischem Umfeld
+\newcommand{\lat}[1]{\dt{\textit{#1}}}
+%%% Einfach
+% Verwendung: \var{Lemma}{Varianten}
+\newcommand{\var}[2]{\edtext{#1}{\Dfootnote{#2}}}
+
+%%% Variante lateinisch - einfach
+%% Verwendung \varlat{Lemma}{Variante}{Sigle}
+\newcommand{\varlat}[3]{\edtext{#1}{\Dfootnote{\dt{#2} \sglat{#3}}}}
+
+%%% Umstellung
+% Verwendung: \vartr{Lemma}{Varianten}
+\newcommand{\vartr}[2]{\edtext{#1}{\lemma{}\Dfootnote[nosep]{\responsio\ #2}}}
+% Bei lateinischen Texten
+\newcommand{\vartrlat}{\vartr}
+
+%%% Auslassung
+% Verwendung: \varom{Lemma}{Siglen}
+\newcommand{\varom}[2]{\edtext{#1}{\Dfootnote[nosep]{\sg{> #2}}}}
+% Verwendung: \varomlat{Lemma}{Siglen}
+\newcommand{\varomlat}[2]{\edtext{#1}{\Dfootnote[nosep]{\sg{> \textit{#2}}}}}
+
+%%% Auslassung mit zusätzlichem Lemma
+% Verwendung: \varomabb{Lemma}{Zusätzliches/abgekürztes Lemma}{Siglen}
+\newcommand{\varomabb}[3]{\edtext{#1}{\lemma{#2}\Dfootnote[nosep]{\sg{> #3}}}}
+% lateinischer Text
+\newcommand{\varomabblat}[3]{\edtext{#1}{\lemma{#2}\Dfootnote[nosep]{\sg{> \textit{#3}}}}}
+%%% Hinzufügung
+% Verwendung: \varadd{Lemma}{Varianten}
+\newcommand{\varadd}[2]{\edtext{#1}{\Dfootnote[nosep]{+ #2}}}
+
+%%% Hinzufügung lateinisch
+% Verwendung: \varaddlat{Lemma}{hinzugefügter Texte}{Sigle}
+\newcommand{\varaddlat}[3]{\edtext{#1}{\Dfootnote[nosep]{\dt{+ #2} \sglat{#3}}}}
+
+%%% Einfach ohne ]
+% Verwendung: \varabb{Lemma}{Varianten}
+\newcommand{\varabb}[2]{\edtext{#1}{\Dfootnote[nosep]{#2}}}
+
+%%% Einfach ohne ] lateinisch
+\newcommand{\varabblat}[3]{\edtext{#1}{\Dfootnote[nosep]{\dt{#2} \sglat{#3}}}}
+
+%%% Mit zusätzlichem Lemma
+% Verwendung: \varl{Lemma}{Zusätzliches/abgekürztes Lemma}{Varianten}
+\newcommand{\varl}[3]{\edtext{#1}{\lemma{#2}\Dfootnote{#3}}}
+
+%%% Mit zusätzlichem Lemma ohne ]
+% Verwendung: \varlabb{Lemma}{Zusätzliches/abgekürztes Lemma}{Varianten}
+\newcommand{\varlabb}[3]{\edtext{#1}{\lemma{#2}\Dfootnote[nosep]{#3}}}
+
+%% Paragraphenzählung in Hss
+\newcommand{\paracount}[3]{\edtext{#1}{\lemma{}\Dfootnote[nosep]{#2 \sg{#3}}}}
+
+%%%%%%% Bezeugungsleiste %%%%%%%%%%%%%%%%%%%
+%% Verwendung: \bezeugung{Handschriften}
+\newcommand{\bezdummy}{\edtext{}{\Cfootnote[nonum]{}}} % sorgt für
+                                % einen leeren Eintrag
+\newcommand{\bezeugung}[1]{\txtbeforeXnotes[C]{\dt{#1}\hspace{0.5em}}}
+%\newcommand{\bezeugung}[1]{\edtext{}{\Cfootnote[nonum]{\hspace{-0.25em}\sg{#1}}}}
+\newcommand{\bezeugungpart}[2]{\edtext{#1}{\Cfootnote{\sg{#2}}}}
+\newcommand{\bezeugungpartlang}[3]{\edtext{#1}{\lemma{#2}\Cfootnote[nosep]{\sg{#3}}}}
+\newcommand{\bezeugungextra}[1]{\edtext{}{\Cfootnote[nonum]{\hspace{-0.8em}\sg{#1}}}} 
+%%%%%%%% Historischer Kommentar %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Verwendung: \hist{Kommentar}
+\newcommand{\hist}[1]{\footnoteA{#1}}
+
+%%%%%%%%%%%%%% Weitere Abkürzungen %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\dt}{\foreignlanguage{german}}
+\newcommand{\griech}{\foreignlanguage{polutonikogreek}}
+\newcommand{\latein}[1]{\foreignlanguage{latin}{\textit{#1}}}
+\newcommand{\mg}{\textsuperscript{\,mg}}
+\newcommand{\slin}{\textsuperscript{\,sl}}
+\newcommand{\corr}{\textsuperscript{\,c}}
+\newcommand{\ras}{\textsuperscript{\,ras}}
+\newcommand{\ts}{\textsuperscript}
+\newcommand{\tsub}{\textsubscript}
+%%%%%% Neudefinition von teubner.sty-Abkürzungen %%%%%%%%%%
+\renewcommand{\Ladd}[1]{\dt{<}#1\dt{>}}%
+\renewcommand{\ladd}[1]{{[}%
+    {#1\/}{]}}%
+\renewcommand{\dBar}{\textbardbl}
+%%%%%% Linie über Buchstaben %%%%%%%%%%
+\usepackage{ulem}
+\protected\def\oline{\bgroup \ULdepth=-1.9ex \ULset}
+
+
+%%%%%%%%% Referenzierung von Textpassagen %%%%%%%%%%%%%%%
+%% Dirk-Jan Dekker in comp.text.tex: cross-referencing entire passages in ledmac
+\newcommand{\refpassage}[2]{%
+   \xpageref{#1},\xlineref{#1}%
+   \ifnum\xpageref{#1}=\xpageref{#2}
+      \ifnum\xlineref{#1}=\xlineref{#2}
+      \else
+         \endashchar\xlineref{#2}%
+      \fi
+   \else
+      \endashchar\xpageref{#2},\xlineref{#2}%
+   \fi
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Maße und Einstellungen %%%%%%%%%%%%%%%%%%%
+\lineation{page}
+\sidenotemargin{left}
+\linenummargin{right}
+\setlength{\linenumsep}{.5em}
+\setlength{\parindent}{1em}
+\setlength\parskip{0em} 
+   \tolerance1414
+   \hbadness1414
+   \vbadness1414
+\emergencystretch35pt
+   \hfuzz0.5pt
+\widowpenalty=10000
+   \vfuzz \hfuzz
+ \clubpenalty=10000
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% Paralleltext  %%%%%%%%%%%%
+\maxchunks{300}
+\renewcommand*{\Rlineflag}{}
+% \renewcommand*{\leftlinenum}{}
+% \renewcommand*{\rightlinenum}{}
+\renewcommand*{\leftlinenumR}{}
+\renewcommand*{\rightlinenumR}{}
+%%%%%%% Spaltenabstand %%%%%%%%%%
+\setlength{\Lcolwidth}{.46\textwidth}
+\setlength{\Rcolwidth}{.50\textwidth}
+\renewcommand*{\columnseparator}{\hspace{.04\textwidth}}
+%\setlength{\Lcolwidth}{65mm}
+%\setlength{\Rcolwidth}{75mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% TOC %%%%%%%%%%%%%%%%%%%%%
+%%%%%%% Style des Titels u. d. Kapitelüberschriften %%%
+\renewcommand{\printtoctitle}[1]{\centering\normalfont\Large #1}
+\renewcommand{\cftchapterfont}{\raggedright\normalfont\large}
+\renewcommand{\cftchapterpagefont}{\normalfont}
+%%%%%%% Abstände zwischen Nummer und Titel
+\setlength{\cftchapternumwidth}{3em}
+\setlength{\cftsectionnumwidth}{3em}
+\setlength{\cftsectionindent}{0em}
+%%%%%%% Punkte %%%%%%%%%%%%%%%%%%%%
+\renewcommand{\cftsectiondotsep}{\cftdotsep}
+\renewcommand{\cftchapterdotsep}{\cftdotsep}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% Captions %%%%%%%%%%%%%%%%%%%
+\captionnamefont{\scriptsize}
+\captiontitlefont{\scriptsize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% Index %%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\pagelinesep}{,} % Trenner zw. Seite u. Zeile
+\renewcommand*{\see}[2]{\textit{\seename} #1}
+%%%%%%% Dreispaltig und sonstige Index-Formatierungen 
+\setlength{\indexcolsep}{1cm}
+% \setlength{\indexrule}{.1pt}
+\renewenvironment{theindex}{%
+  \begin{multicols}{3}[\section*{\indexname}\preindexhook][10\baselineskip]%
+ \raggedcolumns
+  \raggedright\footnotesize
+  \indexmark
+  \setlength{\columnseprule}{\indexrule}
+  \setlength{\columnsep}{\indexcolsep}
+  \ifnoindexintoc\else
+    \phantomsection
+    \addcontentsline{toc}{section}{\indexname}
+  \fi
+%   \thispagestyle{chapter}
+  \parindent\z@
+  \parskip\z@ \@plus .3\p@\relax
+  \let\item\@idxitem}
+{\end{multicols}}
+% \renewcommand{\@idxitem}  {\par\hangindent 20\p@}
+% \renewcommand{\subitem}   {\par\hangindent 40\p@}
+% \renewcommand{\subsubitem}{\par\hangindent 60\p@}
+% \renewcommand{\indexspace}{\par \vskip 20\p@ \@plus5\p@ \@minus3\p@\relax}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% Diskussionsbedarf / Noch zu erledigen %%%%%%%%%%%%%%%
+% \usepackage[german,colorinlistoftodos]{todonotes}
+\usepackage[disable]{todonotes} % Option: disable
+\newcommand{\todohcb}[1]{\todo[author=HCB,inline,color=green!40]{#1}}
+\newcommand{\todohiwi}[1]{\todo[author=Hiwi,inline,color=red!40]{#1}}
+\newcommand{\todoavs}[1]{\todo[author=AvS,inline,color=blue!20]{#1}}
+\newcommand{\todocm}[1]{\todo[author=CM,inline,color=yellow!40]{#1}}
+\newcommand{\todoun}[1]{\todo[author=??,inline,color=orange!40]{#1}}
+\newcommand{\todotk}[1]{\todo[author=TKÜ,inline,color=orange!60]{#1}}
+\newcommand{\diskussion}[1]{\todo[inline]{#1}}
+\newcommand{\diskussionsbedarf}{\begin{framed}\bfseries\centering Diskussionsbedarf\end{framed}}
+\newcommand{\frage}[1]{\protect\addcontentsline{tdo}{todo}{#1}\LitNil\LitNil\texttt{#1}\LitNil\LitNil\ }
+% \newcommand{\diskussionsbedarf}[1]{} % Umdefinition, falls Diskussionsbedarf nicht angezeigt werden soll
+% \newcommand{\frage}[1]{}
+
+%%%%%%%%%%%%%% Stellenangaben %%%%%%%%%%%%%
+\usepackage{xifthen}
+% % Autor, Buch Stelle oder (leer) Buch Stelle
+% \newcommand{\stelle}[4][]{% allgemeiner Befehl
+%   \ifthenelse{\isempty{#1}}{\ifthenelse{\isempty{#2}}{#3 #4}{#2, #3
+%   #4}}{\ifthenelse{\isempty{#2}}{#3 #4\exindex{#3!#4}}{#2, #3
+%   #4\exindex{#2!#3!#4}}}}
+% -o-Befehl: ohne Autor, Buch (bei mehreren Verweisen hintereinander)
+% -a-Befehl: ohne Autor (bei Verweis ohne Nennung des Autors, nur Werk)
+%% Dokumente
+\newcommand{\dok}[2][]{%
+  \ifthenelse{\isempty{#1}}{Dok. #2}{Dok. #2\exindex{Dokumente!#2}}}
+\newcommand{\doko}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Dokumente!#2}}}
+%% Markell
+\newcommand{\markell}[2][]{%
+  \ifthenelse{\isempty{#1}}{Markell, fr. #2}{Markell, fr. #2\exindex{Markell!fr.!#2}}}
+\newcommand{\markello}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Markell!fr.!#2}}}
+\newcommand{\markella}[2][]{%
+  \ifthenelse{\isempty{#1}}{fr. #2}{fr. #2\exindex{Markell!fr.!#2}}}
+%% Euseb
+\newcommand{\eushe}[2][]{%
+  \ifthenelse{\isempty{#1}}{Eus., h.\,e. #2}{Eus., h.\,e. #2\exindex{Eusebius!h.e.!#2}}}
+\newcommand{\eusvc}[2][]{%
+  \ifthenelse{\isempty{#1}}{Eus., v.\,C. #2}{Eus., v.\,C. #2\exindex{Eusebius!v.C.!#2}}}
+\newcommand{\eusde}[2][]{%
+  \ifthenelse{\isempty{#1}}{Eus., d.\,e. #2}{Eus., d.\,e. #2\exindex{Eusebius!d.e.!#2}}}
+%% Sokrates
+\newcommand{\socrhe}[2][]{%
+  \ifthenelse{\isempty{#1}}{Socr., h.\,e. #2}{Socr., h.\,e. #2\exindex{Socrates!h.e.!#2}}}
+\newcommand{\socrheo}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Socrates!h.e.!#2}}}
+%% Sozomenos
+\newcommand{\sozhe}[2][]{%
+  \ifthenelse{\isempty{#1}}{Soz., h.\,e. #2}{Soz., h.\,e. #2\exindex{Sozomenus!h.e.!#2}}}
+\newcommand{\sozheo}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Sozomenus!h.e.!#2}}}
+%% Theodoret
+\newcommand{\thhe}[2][]{%
+  \ifthenelse{\isempty{#1}}{Thdt., h.\,e. #2}{Thdt., h.\,e. #2\exindex{Theodoret!h.e.!#2}}}
+\newcommand{\thheo}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Theodoret!h.e.!#2}}}
+%% Euagrios
+\newcommand{\evagr}[2][]{%
+  \ifthenelse{\isempty{#1}}{Evagr., h.\,e. #2}{Evagr., h.\,e. #2\exindex{Evagrius!h.e.!#2}}}
+%% Rufin
+\newcommand{\rufhe}[2][]{%
+  \ifthenelse{\isempty{#1}}{Rufin., hist. #2}{Rufin., hist. #2\exindex{Rufinus!hist.!#2}}} %TLL
+\newcommand{\rufheo}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Rufinus!hist.!#2}}} %TLL
+%% Philostorgios
+\newcommand{\philost}[2][]{%
+  \ifthenelse{\isempty{#1}}{Philost., h.\,e. #2}{Philost., h.\,e. #2\exindex{Philostorgius!h.e.!#2}}}
+\newcommand{\philosto}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Philostorgius!h.e.!#2}}}
+%% Hilarius
+\newcommand{\hilcoll}[2][]{%
+  \ifthenelse{\isempty{#1}}{Hil., coll.\,antiar. #2}{Hil., coll.\,antiar. #2\exindex{Hilarius!coll. antiar.!#2}}} %TLL
+\newcommand{\hilcollo}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Hilarius!coll. antiar.!#2}}} %TLL
+\newcommand{\hilcolla}[2][]{%
+  \ifthenelse{\isempty{#1}}{coll.\,antiar. #2}{coll.\,antiar. #2\exindex{Hilarius!coll. antiar.!#2}}} %TLL
+\newcommand{\hilsyn}[2][]{%
+  \ifthenelse{\isempty{#1}}{Hil., syn. #2}{Hil., syn. #2\exindex{Hilarius!syn.!#2}}} %TLL
+\newcommand{\hilsyno}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Hilarius!syn.!#2}}} %TLL
+\newcommand{\hilsyna}[2][]{%
+  \ifthenelse{\isempty{#1}}{syn. #2}{syn. #2\exindex{Hilarius!syn.!#2}}} %TLL
+\newcommand{\hiladconst}[2][]{%
+  \ifthenelse{\isempty{#1}}{Hil., ad Const. #2}{Hil., ad Const. #2\exindex{Hilarius!ad Const.!#2}}}
+\newcommand{\hiladconsta}[2][]{%
+  \ifthenelse{\isempty{#1}}{ad Const. #2}{ad Const. #2\exindex{Hilarius!ad Const.!#2}}}
+\newcommand{\hilconst}[2][]{%
+  \ifthenelse{\isempty{#1}}{Hil., c.\,Const. #2}{Hil., c.\,Const. #2\exindex{Hilarius!c. Const.!#2}}}
+\newcommand{\hilconsta}[2][]{%
+  \ifthenelse{\isempty{#1}}{c.\,Const. #2}{c.\,Const. #2\exindex{Hilarius!c. Const.!#2}}}
+\newcommand{\hilconsto}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Hilarius!c. Const.!#2}}}
+\newcommand{\hilaux}[2][]{%
+  \ifthenelse{\isempty{#1}}{Hil., c.\,Aux. #2}{Hil., c.\,Aux. #2\exindex{Hilarius!c. Aux.!#2}}} %TLL
+%% Athanasius
+\newcommand{\athar}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., Ar. #2}{Ath., Ar. #2\exindex{Athanasius!Ar.!#2}}}
+\newcommand{\athdrac}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., ep.\,Drac. #2}{Ath., ep.\,Drac. #2\exindex{Athanasius!ep. Drac.!#2}}}
+\newcommand{\athdraca}[2][]{%
+  \ifthenelse{\isempty{#1}}{ep.\,Drac. #2}{ep.\,Drac. #2\exindex{Athanasius!ep. Drac.!#2}}}
+\newcommand{\athadelpha}[2][]{%
+  \ifthenelse{\isempty{#1}}{ep.\,Adelph. #2}{ep.\,Adelph. #2\exindex{Athanasius!ep. Adelph.!#2}}}
+\newcommand{\athmort}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., ep.\,mort.\,Ar. #2}{Ath., ep.\,mort.\,Ar. #2\exindex{Athanasius!ep. mort. Ar.!#2}}}
+\newcommand{\athmorta}[2][]{%
+  \ifthenelse{\isempty{#1}}{ep.\,mort.\,Ar. #2}{ep.\,mort.\,Ar. #2\exindex{Athanasius!ep. mort. Ar.!#2}}}
+\newcommand{\athepict}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., ep.\,Epict. #2}{Ath., ep.\,Epict. #2\exindex{Athanasius!ep. Epict.!#2}}}
+\newcommand{\athjov}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., ep.\,Jov. #2}{Ath., ep.\,Jov. #2\exindex{Athanasius!ep. Jov.!#2}}}
+\newcommand{\athjovo}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Athanasius!ep. Jov.!#2}}}
+\newcommand{\athafr}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., ep.\,Afr. #2}{Ath., ep.\,Afr. #2\exindex{Athanasius!ep. Afr.!#2}}}
+\newcommand{\athaeg}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., ep.\,Aeg.\,Lib. #2}{Ath., ep.\,Aeg.\,Lib. #2\exindex{Athanasius!ep. Aeg. Lib.!#2}}}
+\newcommand{\athha}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., h.\,Ar. #2}{Ath., h.\,Ar. #2\exindex{Athanasius!h. Ar.!#2}}}
+\newcommand{\athhaa}[2][]{%
+  \ifthenelse{\isempty{#1}}{h.\,Ar. #2}{h.\,Ar. #2\exindex{Athanasius!h. Ar.!#2}}}
+\newcommand{\athhao}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Athanasius!h. Ar.!#2}}}
+\newcommand{\athfug}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., fug. #2}{Ath., fug. #2\exindex{Athanasius!fug.!#2}}}
+\newcommand{\athfuga}[2][]{%
+  \ifthenelse{\isempty{#1}}{fug. #2}{fug. #2\exindex{Athanasius!fug.!#2}}}
+\newcommand{\athas}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., apol.\,sec. #2}{Ath., apol.\,sec. #2\exindex{Athanasius!apol. sec.!#2}}}
+\newcommand{\athasa}[2][]{%
+  \ifthenelse{\isempty{#1}}{apol.\,sec. #2}{apol.\,sec. #2\exindex{Athanasius!apol. sec.!#2}}}
+\newcommand{\athsyn}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., syn. #2}{Ath., syn. #2\exindex{Athanasius!syn.!#2}}}
+\newcommand{\athsyna}[2][]{%
+  \ifthenelse{\isempty{#1}}{syn. #2}{syn. #2\exindex{Athanasius!syn.!#2}}}
+\newcommand{\athsyno}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Athanasius!syn.!#2}}}
+\newcommand{\athtom}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., tom. #2}{Ath., tom. #2\exindex{Athanasius!tom.!#2}}}
+\newcommand{\athac}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., apol.\,Const. #2}{Ath., apol.\,Const. #2\exindex{Athanasius!apol. Const.!#2}}}
+\newcommand{\athdion}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., Dion. #2}{Ath., Dion. #2\exindex{Athanasius!Dion.!#2}}}
+\newcommand{\athdiono}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Athanasius!Dion.!#2}}}
+\newcommand{\athinc}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., inc. #2}{Ath., inc. #2\exindex{Athanasius!inc.!#2}}}
+\newcommand{\athinca}[2][]{%
+  \ifthenelse{\isempty{#1}}{inc. #2}{inc. #2\exindex{Athanasius!inc.!#2}}}
+\newcommand{\athinco}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Athanasius!inc.!#2}}}
+\newcommand{\athdecr}[2][]{%
+  \ifthenelse{\isempty{#1}}{Ath., decr. #2}{Ath., decr. #2\exindex{Athanasius!decr.!#2}}}
+\newcommand{\athdecro}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Athanasius!decr.!#2}}}
+%% Euseb
+\newcommand{\euseth}[2][]{%
+  \ifthenelse{\isempty{#1}}{Eus., e.\,th. #2}{Eus., e.\,th. #2\exindex{Eusebius!e. th.!#2}}}
+\newcommand{\eusetho}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Eusebius!e. th.!#2}}}
+%% Epiphanius
+\newcommand{\epiph}[2][]{%
+  \ifthenelse{\isempty{#1}}{Epiph., haer. #2}{Epiph., haer. #2\exindex{Epiphanius!haer.!#2}}}
+\newcommand{\sulpchr}[2][]{%
+  \ifthenelse{\isempty{#1}}{Sulp.\,Sev., chron. #2}{Sulp.\,Sev.,
+    chron. #2\exindex{Sulpicius Severus!chron.!#2}}}
+\newcommand{\sulpchra}[2][]{%
+  \ifthenelse{\isempty{#1}}{chron. #2}{chron. #2\exindex{Sulpicius Severus!chron.!#2}}}
+\newcommand{\marvict}{Mar. Victorin., adv. Arium } %TLL
+\newcommand{\mortpers}{Lact., mort.\,pers. } %TLL
+\newcommand{\tertjud}{Tert., adv.\,Iud. }  %TLL
+\newcommand{\tertapol}{Tert., apol. } %TLL
+\newcommand{\tertcor}{Tert., coron. }  %TLL
+\newcommand{\tertidol}{Tert., idol. }  %TLL
+\newcommand{\lactinst}{Lact., inst. } %TLL
+\newcommand{\lactira}{Lact., ira } %TLL
+\newcommand{\virill}[2][]{%
+  \ifthenelse{\isempty{#1}}{Hier., vir.\,ill. #2}{Hier., vir.\,ill. #2\exindex{Hieronymus!vir. ill.!#2}}} %TLL
+\newcommand{\hiercl}[2][]{%
+  \ifthenelse{\isempty{#1}}{Hier., c.\,Lucif. #2}{Hier., c.\,Lucif. #2\exindex{Hieronymus!c. Lucif.!#2}}} %TLL
+\newcommand{\hierchron}{Hier., chron. }  %TLL
+\newcommand{\tacann}{Tac., ann. } %TLL
+\newcommand{\did}{Did. }
+\newcommand{\ambrfid}{Ambr., fid. } %TLL
+\newcommand{\augep}{Aug., epist. } %TLL
+\newcommand{\orcels}{Or., Cels. }
+\newcommand{\zach}{Zach. Mit., h.\,e. }%Zacharias Rhetor
+\newcommand{\anagn}{Thdr. Lect., h.\,e. }
+\newcommand{\thphn}{Thphn., chron. }
+\newcommand{\libprec}[2][]{%
+  \ifthenelse{\isempty{#1}}{Faustin., lib.\,prec. #2}{Faustin.,
+    lib.\,prec. #2\exindex{Faustinus!lib. prec.!#2}}}
+\newcommand{\libpreco}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Faustinus!lib. prec.!#2}}}
+\newcommand{\basep}[2][]{%
+  \ifthenelse{\isempty{#1}}{Bas., ep. #2}{Bas.,
+    ep. #2\exindex{Basilius!ep.!#2}}}
+\newcommand{\basepo}[2][]{%
+  \ifthenelse{\isempty{#1}}{#2}{#2\exindex{Basilius!ep.!#2}}}
+%% Search & replace regexp
+%% \\hilcoll\s-\([AB]\s-[IV]+\s-[0-9][,.]?[0-9]?[.,]?[0-9]*[-~f.]*[0-9]*\) -> \\hilcoll{\1}
+%% \\athha\s-\([0-9]+\s.[0-9]*\) -> \\athha{\1}
+%% \\socrhe\s-\([IV]+\)\s-\([0-9]+[.,]?[0-9]*[-~f.]*[0-9]*\) -> \\socrhe{\1 \2}
+%% Dok.\s-\([0-9]+[.]?[0-9]?[,]?[0-9]*[-~f.]*[0-9]*\) -> \\dok{\1}
+%%%%%%%%% Stellenangaben bis hierher %%%%%%%%%%%%%%
+\makeatother

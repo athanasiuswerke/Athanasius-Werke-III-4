@@ -1,0 +1,24 @@
+#!/bin/sh
+# This is file 'vc' for input of bzr info in latex files
+# Annette von Stockhausen 01.09.2013
+# This file is Public Domain.
+# Ausgabe der Revision in der Fusszeile
+# put \input{vc} in your latex-document near the start of the file
+LC_ALL=de_DE
+git log --pretty=format:"%ad %s [%an]" --date=short -1 | awk '{print "\\gdef\\BZR{"$0"}"}' > vc-temp.tex
+iconv -f utf-8 -t iso-8859-15 vc-temp.tex > vc.tex
+rm vc-temp.tex
+### Ausgabe des Bzr-Logs im Dokument
+echo "# Letzte Änderungen\n" > log.md
+# Ausgabe der letzten 35 Einträge im Log
+git log --pretty=format:"%ad %s [%an]" --date=short -40 >> log.md
+# bzr log --gnu-changelog -r -35.. >> log.md 
+# Alle Einträge, die mit 2013 oder 2014 beginnen, werden Listeneinträge
+sed -i -e 's/2013/\- 2013/1' log.md
+sed -i -e 's/2014/\- 2014/1' log.md
+# Umwandlung in LaTeX
+pandoc log.md --chapter -o log-temp.tex
+# Konvertierung von UTF in Latin-1
+iconv -f utf-8 -t iso-8859-15 log-temp.tex > log.tex
+rm log-temp.tex
+rm log.md

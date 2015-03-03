@@ -1,0 +1,190 @@
+\documentclass[a4paper,12pt,openany]{memoir}
+\input{config}
+\input{vc}
+% \usepackage[inline]{showlabels}
+\begin{document}
+% %%% Letzte Änderungen
+% \input{log}
+% %%% Todos
+% \todototoc
+% \listoftodos
+% \clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% TITELEI %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlingpage}
+\thispagestyle{empty}
+%%%%%%%%% Schmutzblatt
+\begin{center}
+\large{ATHANASIUS WERKE}\par
+\normalsize{DRITTER BAND}\par
+\normalsize{ERSTER TEIL}
+\end{center}
+\clearpage
+%%%%%%%%%%%%%% Reihenseite
+\thispagestyle{empty}
+\begin{center}
+\Huge{ATHANASIUS WERKE}\\
+\vspace*{1cm}
+\large{DRITTER BAND}\\
+\large{ERSTER TEIL}\\
+\vspace*{1cm}
+\LARGE{DOKUMENTE ZUR GESCHICHTE DES ARIANISCHEN STREITES}\\
+\vspace*{1cm}
+\large{HERAUSGEGEBEN IM AUFTRAG DER BERLIN-BRANDENBURGISCHEN AKADEMIE DER
+WISSENSCHAFTEN}\par
+\large{VON HANNS CHRISTOF BRENNECKE, ANNETTE VON STOCKHAUSEN,
+  CHRISTIAN MÜLLER, UTA HEIL UND ANGELIKA WINTJES}\par
+\vspace*{2cm}
+\large{4. LIEFERUNG}
+\end{center}
+\vspace*{\fill}
+\begin{center}
+% \includegraphics{degruyter_signet}
+ % degruyter_signet.png: 555x1038 pixel, 1200dpi, 1.17x2.20 cm, bb=0 0 33 62
+\end{center}
+\begin{center}
+\large{WALTER DE GRUYTER \LitNil\ BERLIN \LitNil\ BOSTON}\par
+\large{2014}
+\end{center}
+\clearpage
+%%%%%%%%%%%%% Titelseite
+\thispagestyle{empty}
+\begin{center}
+\Huge{ATHANASIUS WERKE}\\
+\vspace*{1cm}
+\large{DRITTER BAND}\\
+\large{ERSTER TEIL}\\
+\vspace*{1cm}
+\LARGE{DOKUMENTE ZUR GESCHICHTE DES ARIANISCHEN STREITES}\\
+\vspace*{2cm}
+\large{4. LIEFERUNG}\par
+\large{BIS ZUR SYNODE VON ALEXANDRIEN 362}\par
+\vspace*{1cm}
+\large{HERAUSGEGEBEN VON\\HANNS CHRISTOF BRENNECKE, ANNETTE VON
+STOCKHAUSEN, CHRISTIAN MÜLLER, UTA HEIL UND ANGELIKA WINTJES}
+\end{center}
+\vspace*{\fill}
+\begin{center}
+ % \includegraphics{degruyter_signet}
+ % degruyter_signet.png: 555x1038 pixel, 1200dpi, 1.17x2.20 cm, bb=0 0 33 62
+\end{center}
+\begin{center}
+\large{WALTER DE GRUYTER \LitNil\ BERLIN \LitNil\ BOSTON}\par
+\large{2014}
+\end{center}
+\end{titlingpage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% VORWORT %%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+\pagenumbering{roman}
+\setcounter{page}{5}
+\input{vorwort.tex}
+\cleardoublepage
+\selectlanguage{german}
+\renewcommand{\contentsname}{Inhalt}
+\tableofcontents*
+\input{siglen}
+\cleardoublepage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% HAUPTTEXT %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+\setcounter{page}{317}
+\setcounter{chapter}{44}
+\input{45.1.tex}
+\input{45.2.tex}
+\input{46.tex}
+\input{47.1.tex}
+\input{47.2.tex}
+\input{47.3.tex}
+\input{47.4.tex}
+\input{48.tex}
+\input{49.tex}
+\input{50.1.tex}
+\input{50.2.tex}
+\input{50.3.tex}
+\input{50.4.tex}
+\input{50.5.tex}
+\input{51.tex}
+\input{52.tex}
+\input{53.tex}
+\input{54.tex}
+\input{55.tex}
+\input{56.1.tex}
+\input{56.2.tex}
+\input{56.3.tex}
+\input{56.4.tex}
+\input{56.5.tex}
+\input{57.1.tex}
+\input{57.2.tex}
+\input{57.3.tex}
+\input{58.tex}
+\input{59.1.tex}
+\input{59.2.tex}
+\input{59.3.tex}
+\input{59.4.tex}
+\input{59.5.tex}
+\input{59.6.tex}
+\input{59.7.tex}
+\input{59.8.tex}
+\input{59.9.tex}
+\input{59.10.tex}
+\input{59.11.tex}
+\input{60.1.tex}
+\input{60.2.tex}
+\input{61.1.tex}
+\input{61.2.tex}
+\input{62.1.tex}
+\input{62.2.tex}
+\input{62.3.tex}
+\input{62.4.tex}
+\input{62.5.tex}
+\input{62.6.tex}
+\input{63.tex}
+\input{64.tex}
+\input{65.tex}
+\input{66.tex}
+\input{67.tex}
+\input{68.tex}
+\input{69.1.tex}
+\input{69.2.tex}
+\input{69.3.tex}
+\input{69.4.tex}
+\input{69.5.tex}
+\input{69.6.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% INDICES ETC. %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+\aliaspagestyle{chapter}{empty}
+\renewcommand{\clearforchapter}{\clearpage}  % Chapter wieder neue Seite
+\chapter*{Literatur}
+\addcontentsline{toc}{chapter}{Literatur}
+\label{literatur}
+\markboth{Literatur}{Literatur}
+\printbibliography[heading=edition,keyword=edition]
+\printbibliography[heading=literatur,keyword=literatur]
+%%%%%%%%%%%%%%
+\chapter[Register]{Register}
+\renewcommand{\preindexhook}{}
+\renewcommand{\indexname}{Verzeichnis der Quellen}
+\printindex[quellen]
+\renewcommand{\preindexhook}{\noindent Kursivierte Ziffern beziehen sich auf Stellen, an denen kein Zitat, sondern nur eine Anspielung vorliegt.}
+\renewcommand{\indexname}{Verzeichnis der Bibelstellen}
+\printindex[bibel]
+\renewcommand{\preindexhook}{}
+\renewcommand{\indexname}{Verzeichnis der antiken Quellen}
+\printindex[stellen]
+\renewcommand{\preindexhook}{\noindent Kursivierte Ziffern beziehen sich auf Stellen, an denen nicht sicher auszumachen ist, ob es sich um die genannte Person handelt.}
+\renewcommand{\indexname}{Verzeichnis der Personen- und Ortsnamen}
+\printindex[namen]
+\renewcommand{\preindexhook}{}
+\renewcommand{\indexname}{Verzeichnis der Synoden}
+\printindex[synoden]
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
